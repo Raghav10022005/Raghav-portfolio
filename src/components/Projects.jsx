@@ -20,7 +20,7 @@ const Projects = () => {
               fontSize: "14px",
             }}
           >
-             Projects
+            Projects
           </p>
 
           <h2
@@ -45,7 +45,14 @@ const Projects = () => {
               key={index}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.15 }}
+              whileHover={{
+                y: -10,
+                scale: 1.02,
+              }}
+              transition={{
+                delay: index * 0.15,
+                duration: 0.1,
+              }}
               viewport={{ once: true }}
               className="glass"
               style={{
@@ -54,6 +61,8 @@ const Projects = () => {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
+                transition: "all 0.3s ease",
+                border: "1px solid rgba(255,255,255,0.05)",
               }}
             >
               <div>
@@ -137,6 +146,7 @@ const Projects = () => {
                         borderRadius: "999px",
                         fontSize: "12px",
                         color: "var(--muted)",
+                        background: "rgba(255,255,255,0.02)",
                       }}
                     >
                       {tag}

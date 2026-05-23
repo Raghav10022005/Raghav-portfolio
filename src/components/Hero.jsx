@@ -11,14 +11,16 @@ const Hero = () => {
         alignItems: "center",
         justifyContent: "center",
         position: "relative",
+        overflow: "hidden",
         textAlign: "center",
       }}
     >
+      {/* Background Grid */}
       <div
         style={{
           position: "absolute",
           inset: 0,
-          opacity: 0.15,
+          opacity: 0.12,
         }}
       >
         <svg width="100%" height="100%">
@@ -42,6 +44,55 @@ const Hero = () => {
         </svg>
       </div>
 
+      {/* Glow Orb 1 */}
+      <motion.div
+        animate={{
+          x: [0, 40, -20, 0],
+          y: [0, -30, 20, 0],
+        }}
+        transition={{
+          duration: 12,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        style={{
+          position: "absolute",
+          width: "320px",
+          height: "320px",
+          borderRadius: "50%",
+          background:
+            "rgba(120, 180, 255, 0.12)",
+          filter: "blur(90px)",
+          top: "10%",
+          left: "10%",
+        }}
+      />
+
+      {/* Glow Orb 2 */}
+      <motion.div
+        animate={{
+          x: [0, -30, 20, 0],
+          y: [0, 20, -40, 0],
+        }}
+        transition={{
+          duration: 14,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        style={{
+          position: "absolute",
+          width: "280px",
+          height: "280px",
+          borderRadius: "50%",
+          background:
+            "rgba(255,255,255,0.05)",
+          filter: "blur(100px)",
+          bottom: "10%",
+          right: "12%",
+        }}
+      />
+
+      {/* Hero Content */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -85,8 +136,9 @@ const Hero = () => {
             fontSize: "1rem",
           }}
         >
-          Building intelligent systems using AI, NLP, RAG pipelines,
-          FastAPI, LangChain, and real-time machine learning solutions.
+          Building intelligent systems using AI, NLP,
+          RAG pipelines, FastAPI, LangChain, and
+          real-time machine learning solutions.
         </p>
 
         <div
