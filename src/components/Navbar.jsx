@@ -1,49 +1,42 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { Link, useLocation } from "react-router-dom";
 
 const sections = [
-  "home",
-  "about",
-  "skills",
-  "projects",
-  "contact",
+  {
+    name: "home",
+    path: "/",
+  },
+
+  {
+    name: "about",
+    path: "/about",
+  },
+
+  {
+    name: "skills",
+    path: "/skills",
+  },
+
+  {
+    name: "projects",
+    path: "/projects",
+  },
+
+  {
+    name: "contact",
+    path: "/contact",
+  },
 ];
 
 const Navbar = () => {
-  const [active, setActive] = useState("home");
   const [scrolled, setScrolled] = useState(false);
 
-  const isMobile = window.innerWidth < 768;
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition =
-        window.scrollY + window.innerHeight / 3;
-
       setScrolled(window.scrollY > 40);
-
-      sections.forEach((section) => {
-        const element = document.getElementById(section);
-
-        if (element) {
-          const offsetTop = element.offsetTop;
-          const height = element.offsetHeight;
-
-          if (
-            scrollPosition >= offsetTop &&
-            scrollPosition < offsetTop + height
-          ) {
-            setActive(section);
-          }
-        }
-      });
-
-      if (
-        window.innerHeight + window.scrollY >=
-        document.body.offsetHeight - 50
-      ) {
-        setActive("contact");
-      }
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -51,6 +44,8 @@ const Navbar = () => {
     return () =>
       window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const isMobile = window.innerWidth < 768;
 
   return (
     <motion.nav
@@ -69,7 +64,7 @@ const Navbar = () => {
         top: scrolled ? "12px" : "22px",
         left: 0,
         right: 0,
-        zIndex: 1000,
+        zIndex: 100,
         display: "flex",
         justifyContent: "center",
         padding: "0 12px",
@@ -115,12 +110,12 @@ const Navbar = () => {
         }}
       >
         {sections.map((section) => {
-          const isActive = active === section;
+          const isActive =
+            location.pathname === section.path;
 
           return (
-            <motion.a
-              key={section}
-              href={`#${section}`}
+            <motion.div
+              key={section.name}
               whileHover={{
                 scale: 1.03,
               }}
@@ -129,79 +124,88 @@ const Navbar = () => {
               }}
               style={{
                 position: "relative",
-
-                padding: isMobile
-                  ? "9px 10px"
-                  : scrolled
-                  ? "10px 18px"
-                  : "11px 20px",
-
-                borderRadius: "999px",
-
-                textTransform: "uppercase",
-
-                fontSize: isMobile
-                  ? "10px"
-                  : "12px",
-
-                letterSpacing: "2px",
-
-                color: isActive
-                  ? "white"
-                  : "var(--fg)",
-
-                transition:
-                  "all 0.25s ease",
-
-                overflow: "hidden",
-
-                cursor: "pointer",
-
-                textDecoration: "none",
-
-                flexShrink: 0,
               }}
             >
-              {isActive && (
-                <motion.div
-                  layoutId="navbar-pill"
-                  transition={{
-                    type: "spring",
-                    stiffness: 120,
-                    damping: 18,
-                  }}
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-
-                    borderRadius: "999px",
-
-                    background:
-                      "rgba(255,255,255,0.09)",
-
-                    border:
-                      "1px solid rgba(255,255,255,0.08)",
-
-                    backdropFilter:
-                      "blur(18px)",
-
-                    boxShadow:
-                      "0 4px 20px rgba(255,255,255,0.03)",
-
-                    zIndex: -1,
-                  }}
-                />
-              )}
-
-              <span
+              <Link
+                to={section.path}
                 style={{
                   position: "relative",
-                  zIndex: 2,
+
+                  display: "block",
+
+                  padding: isMobile
+                    ? "9px 10px"
+                    : scrolled
+                    ? "10px 18px"
+                    : "11px 20px",
+
+                  borderRadius: "999px",
+
+                  textTransform: "uppercase",
+
+                  fontSize: isMobile
+                    ? "10px"
+                    : "12px",
+
+                  letterSpacing: "2px",
+
+                  color: isActive
+                    ? "white"
+                    : "var(--fg)",
+
+                  transition:
+                    "all 0.25s ease",
+
+                  overflow: "hidden",
+
+                  cursor: "pointer",
+
+                  textDecoration: "none",
+
+                  flexShrink: 0,
                 }}
               >
-                {section}
-              </span>
-            </motion.a>
+                {isActive && (
+                  <motion.div
+                    layoutId="navbar-pill"
+                    transition={{
+                      type: "spring",
+                      stiffness: 120,
+                      damping: 18,
+                    }}
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+
+                      borderRadius: "999px",
+
+                      background:
+                        "rgba(255,255,255,0.09)",
+
+                      border:
+                        "1px solid rgba(255,255,255,0.08)",
+
+                      backdropFilter:
+                        "blur(18px)",
+
+                      boxShadow:
+                        "0 4px 20px rgba(255,255,255,0.03)",
+
+                      zIndex: -1,
+                    }}
+                  />
+                )}
+
+                <span
+                  style={{
+                    position: "relative",
+                    zIndex: 2,
+                  }}
+                >
+                  {section.name}
+                </span>
+              </Link>
+            </motion.div>
           );
         })}
       </div>
