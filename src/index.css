@@ -34,7 +34,11 @@ body {
 }
 
 .neon-text {
-  text-shadow: 0 0 20px var(--accent);
+  color: var(--accent);
+
+  text-shadow:
+    0 0 8px rgba(59,130,246,0.45),
+    0 0 18px rgba(59,130,246,0.25);
 }
 
 .neon-border {

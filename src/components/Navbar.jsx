@@ -13,6 +13,8 @@ const Navbar = () => {
   const [active, setActive] = useState("home");
   const [scrolled, setScrolled] = useState(false);
 
+  const isMobile = window.innerWidth < 768;
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition =
@@ -70,7 +72,7 @@ const Navbar = () => {
         zIndex: 100,
         display: "flex",
         justifyContent: "center",
-        padding: "0 20px",
+        padding: "0 12px",
         transition: "all 0.25s ease",
       }}
     >
@@ -78,7 +80,8 @@ const Navbar = () => {
         className="glass"
         style={{
           display: "flex",
-          gap: "8px",
+
+          gap: isMobile ? "2px" : "8px",
 
           padding: scrolled
             ? "8px"
@@ -105,6 +108,10 @@ const Navbar = () => {
           position: "relative",
 
           transition: "all 0.3s ease",
+
+          width: "100%",
+          maxWidth: "fit-content",
+          overflowX: "auto",
         }}
       >
         {sections.map((section) => {
@@ -123,7 +130,9 @@ const Navbar = () => {
               style={{
                 position: "relative",
 
-                padding: scrolled
+                padding: isMobile
+                  ? "9px 10px"
+                  : scrolled
                   ? "10px 18px"
                   : "11px 20px",
 
@@ -131,7 +140,9 @@ const Navbar = () => {
 
                 textTransform: "uppercase",
 
-                fontSize: "12px",
+                fontSize: isMobile
+                  ? "10px"
+                  : "12px",
 
                 letterSpacing: "2px",
 
@@ -147,6 +158,8 @@ const Navbar = () => {
                 cursor: "pointer",
 
                 textDecoration: "none",
+
+                flexShrink: 0,
               }}
             >
               {isActive && (
