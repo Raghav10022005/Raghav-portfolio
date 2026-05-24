@@ -165,6 +165,7 @@ const Hero = () => {
           </a>
 
           <a
+            id="resume-download-btn"
             href="/Raghav_Tiwari_Resume.pdf"
             target="_blank"
             rel="noreferrer"
