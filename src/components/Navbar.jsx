@@ -42,7 +42,10 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
 
     return () =>
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener(
+        "scroll",
+        handleScroll
+      );
   }, []);
 
   const isMobile = window.innerWidth < 768;
@@ -128,6 +131,7 @@ const Navbar = () => {
             >
               <Link
                 to={section.path}
+                data-nav={section.name}
                 style={{
                   position: "relative",
 
