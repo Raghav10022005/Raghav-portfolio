@@ -60,8 +60,7 @@ const Hero = () => {
           width: "320px",
           height: "320px",
           borderRadius: "50%",
-          background:
-            "rgba(120, 180, 255, 0.12)",
+          background: "rgba(120, 180, 255, 0.12)",
           filter: "blur(90px)",
           top: "10%",
           left: "10%",
@@ -84,8 +83,7 @@ const Hero = () => {
           width: "280px",
           height: "280px",
           borderRadius: "50%",
-          background:
-            "rgba(255,255,255,0.05)",
+          background: "rgba(255,255,255,0.05)",
           filter: "blur(100px)",
           bottom: "10%",
           right: "12%",
@@ -149,7 +147,9 @@ const Hero = () => {
             flexWrap: "wrap",
           }}
         >
+          {/* View Projects CTA */}
           <a
+            data-cta="view_projects"
             href="#projects"
             style={{
               background: "var(--accent)",
@@ -164,8 +164,10 @@ const Hero = () => {
             View My Work
           </a>
 
+          {/* Resume Download CTA */}
           <a
             id="resume-download-btn"
+            data-cta="download_resume"
             href="/Raghav_Tiwari_Resume.pdf"
             target="_blank"
             rel="noreferrer"
